@@ -2,6 +2,8 @@
 
 A generic base template project for building web scrapers using Python, Selenium, BeautifulSoup, and Typer. Designed to be easily copied and adapted for various scraping targets.
 
+**Note:** For quickly briefing AI assistants (like Google Gemini) on this template's structure and how to adapt it, refer to the `AI_CONTEXT.txt` file in the project root. It includes a summary and an adaptation checklist for next steps.
+
 ## Key Features
 
 * **Selenium WebDriver:** Uses Selenium with `webdriver-manager` for automated browser control, capable of handling dynamic JavaScript-heavy websites. Configurable headless mode.
