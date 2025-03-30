@@ -1,0 +1,32 @@
+# AI Context Summary for Base Scraper Template Project
+
+## Project Purpose
+This project is a **generic Python web scraping template** designed as a reusable starting point. It uses Selenium for browser automation (handling dynamic sites) and BeautifulSoup for HTML parsing. The goal is to provide a robust structure that can be quickly adapted for various specific scraping tasks.
+
+## Core Structure & Components
+- **Project Root:** Contains config files (`.env`, `.gitignore`, `pyproject.toml`, `requirements.txt`), documentation (`README.md`, `HOW_TO_USE_BASE.txt`, this file), and the `src` directory.
+- **`src/basescraper/`:** The main Python package.
+  - `config.py`: Defines default configuration values (target URL, output file, wait time, headless mode). These can be overridden by `.env` variables or CLI arguments.
+  - `scraper.py`: Contains the core scraping logic:
+    - `setup_driver()`: Initializes the Selenium WebDriver (Chrome). Reusable.
+    - `Maps_to_url()`: Navigates the driver to a specified URL. Reusable.
+    - `extract_data(page_source)`: **PLACEHOLDER FUNCTION.** Parses HTML. **MUST BE IMPLEMENTED** with target-specific logic (e.g., BeautifulSoup selectors) by the user adapting this template. Raises `NotImplementedError` in the base.
+    - `handle_data(data, output_target)`: **PLACEHOLDER FUNCTION.** Processes/saves the extracted data. **MUST BE IMPLEMENTED** with desired logic (e.g., save to CSV/DB, send to API) by the user adapting this template. Raises `NotImplementedError` in the base.
+  - `cli.py`: Provides a command-line interface using Typer (`basescraper run` or `python -m src.basescraper.cli run`) to execute the scraping process, handling configuration overrides via arguments. Includes error handling for the placeholder functions.
+
+## Key Characteristics
+- **Generic Template:** It is **non-functional** out-of-the-box because the core extraction and data handling logic are intentionally left unimplemented.
+- **Adaptable:** Designed to be copied for new projects. The primary adaptation involves implementing the `extract_data` and `handle_data` functions in `scraper.py`.
+- **Selenium-Based:** Suitable for websites that require JavaScript execution or browser interaction.
+- **Configurable:** Uses `config.py`, `.env`, and CLI arguments for flexible configuration.
+
+## Current State
+The base template structure is complete. All core reusable functions (`setup_driver`, `Maps_to_url`) and the CLI interface are implemented. The project-specific functions (`extract_data`, `handle_data`) are defined as explicit placeholders (`NotImplementedError`) requiring implementation.
+
+## How to Proceed (When Adapting)
+1. Copy this project folder.
+2. Define target URL and configuration (in `.env`, `config.py`, or via CLI).
+3. Implement `extract_data` in `src/basescraper/scraper.py` with selectors/logic for the target site.
+4. Implement `handle_data` in `src/basescraper/scraper.py` with the desired data storage/processing logic.
+5. Run using the CLI.
+(Refer to `HOW_TO_USE_BASE.txt` for detailed steps).

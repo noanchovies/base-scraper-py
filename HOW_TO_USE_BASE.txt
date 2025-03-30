@@ -1,0 +1,64 @@
+# How to Use This Base Scraper Project Template
+
+## Purpose
+
+This project provides a generic base structure for building web scrapers using Python, Selenium, and BeautifulSoup. It handles common tasks like setting up the Selenium WebDriver, navigating to pages, and providing clear placeholders for project-specific logic. It is designed to be copied and adapted for various scraping targets (e.g., specific websites like Windguru, LinkedIn, classifieds sites).
+
+**IMPORTANT:** This base template is **non-functional** on its own. You MUST implement the data extraction and data handling logic for your specific target website.
+
+## Project Structure
+
+- `/.env`: (Optional) Place environment variables here (e.g., TARGET_URL, OUTPUT_FILENAME, HEADLESS=True/False). Will be loaded automatically. Ignored by Git.
+- `/.gitignore`: Standard Git ignore file for Python projects.
+- `/requirements.txt`: Python dependencies needed to run the scraper.
+- `/pyproject.toml`: Project metadata, including CLI entry point configuration.
+- `/src/`: Contains the main source code.
+  - `/src/basescraper/`: The Python package for the scraper.
+    - `__init__.py`: Makes `basescraper` a Python package.
+    - `config.py`: Contains default configuration values (URL, filename, wait time, etc.). Can be overridden by `.env` or CLI arguments.
+    - `scraper.py`: Contains the core reusable functions (`setup_driver`, `Maps_to_url`) and the **REQUIRED placeholder functions** (`extract_data`, `handle_data`) that you need to implement.
+    - `cli.py`: Defines the command-line interface using Typer to run the scraper.
+
+## How to Adapt for a New Scraping Project
+
+1.  **Copy Project:** Make a complete copy of this `base-scraper-py` directory for your new project (e.g., `my-wind-scraper`).
+2.  **Setup Environment:**
+    - Navigate into the new project directory.
+    - Create/activate a Python virtual environment (`python -m venv venv`, `.\venv\Scripts\activate` or `source venv/bin/activate`).
+    - Install dependencies: `pip install -r requirements.txt`.
+    - (Optional) Initialize Git: Delete the old `.git` folder (if copied), run `git init`, create a new GitHub repo, `git remote add origin <new_repo_url>`, `git add .`, `git commit`, `git push`.
+3.  **Configure:**
+    - Edit `src/basescraper/config.py` to set appropriate defaults for your target.
+    - OR, create/edit the `.env` file in the project root to define `TARGET_URL`, `OUTPUT_FILENAME`, `WAIT_TIME`, `HEADLESS`. Environment variables override `config.py`.
+4.  **Implement Extraction (`extract_data`):**
+    - **THIS IS THE MOST IMPORTANT STEP.**
+    - Open `src/basescraper/scraper.py`.
+    - Find the `extract_data(page_source)` function.
+    - Delete the `raise NotImplementedError` line.
+    - Add your logic using `BeautifulSoup` (or other parsing methods) to parse the `page_source` from your target website.
+    - Use CSS selectors or XPath (identified using browser Developer Tools) to find the specific data elements you need.
+    - Structure the extracted data as a list of dictionaries (e.g., `[{'col1': 'val1'}, {'col1': 'valA'}]`).
+    - Return this list.
+5.  **Implement Data Handling (`handle_data`):**
+    - Find the `handle_data(data, output_target)` function in `src/basescraper/scraper.py`.
+    - Delete the `raise NotImplementedError` line.
+    - Add your logic for what to do with the `data` list returned by `extract_data`.
+    - Examples:
+      - Save to CSV using Pandas (see commented-out example in the function).
+      - Save to a database (e.g., PostgreSQL, Supabase).
+      - Send data to an API endpoint.
+      - Print formatted data to the console.
+    - Use the `output_target` argument if needed (e.g., as the filename for CSV).
+6.  **(Optional) Adjust CLI:**
+    - Modify `src/basescraper/cli.py` if you need different command-line arguments or logic.
+7.  **Run:**
+    - From your project's root directory in the terminal (with venv active):
+      - `python -m src.basescraper.cli run [OPTIONS]`
+      - Example: `python -m src.basescraper.cli run` (uses defaults/env vars)
+      - Example: `python -m src.basescraper.cli run --url "http://specific-page.com" -o "my_data.csv" --no-headless`
+    - (If you install the package using `pip install -e .` and configured `pyproject.toml`):
+      - `basescraper run [OPTIONS]`
+
+## AI Context Summary
+
+This project is a **generic Python web scraping template** using Selenium for browser automation and BeautifulSoup for parsing. Key reusable components are `setup_driver` and `Maps_to_url`. The core scraping logic resides in `extract_data` and the subsequent data processing/storage in `handle_data`. **These two functions (`extract_data`, `handle_data`) are placeholders (`NotImplementedError`) in the base template and MUST be implemented with target-specific logic** when this template is copied and used for a new scraping project. Configuration is managed via `config.py`, `.env` file overrides, and optional CLI arguments defined in `cli.py` using Typer. The main goal is to provide a reusable structure to accelerate the development of new scraping tasks.
