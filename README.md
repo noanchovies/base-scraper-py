@@ -1,3 +1,5 @@
+---CURRENTLY BEING REVISED AND POTENTIALLY TO BE MERGED WITH A NEWER MORE EFFICIENT VERSION---
+
 # Base Scraper Template (Python/Selenium)
 
 A generic base template project for building web scrapers using Python, Selenium, BeautifulSoup, and Typer. Designed to be easily copied and adapted for various scraping targets.
