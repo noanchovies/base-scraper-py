@@ -1,3 +1,4 @@
+Use https://github.com/noanchovies/scraper-engine instead 
 ---CURRENTLY BEING REVISED AND POTENTIALLY TO BE MERGED WITH A NEWER MORE EFFICIENT VERSION---
 
 # Base Scraper Template (Python/Selenium)
