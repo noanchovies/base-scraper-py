@@ -1,6 +1,8 @@
----Use https://github.com/noanchovies/scraper-engine instead ---
+##---Use https://github.com/noanchovies/scraper-engine instead ---
 
----This version was cool but too complex and not good enough. scraper-engine is "more better" plug&play. Keeping old version for log and learning purposes---
+---This version was cool but not good enough. scraper-engine is faster, plug&play, "more better" --- 
+
+_Keeping old version for log and learning purposes_ 
 
 # Base Scraper Template (Python/Selenium)
 
